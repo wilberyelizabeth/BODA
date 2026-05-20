@@ -110,7 +110,11 @@ button:hover{
 transform:scale(1.03);
 background:#ffeef2;
 }
-
+  button:disabled{
+  opacity:0.6;
+  cursor:not-allowed;
+  transform:none;
+}
 .hidden{
 display:none;
 }
@@ -167,6 +171,7 @@ display:none;
     padding:13px;
     font-size:0.95rem;
   }
+
 }
 </style>
 </head>
@@ -246,6 +251,10 @@ function mostrarPareja(){
 document.getElementById("formulario").addEventListener("submit", function(e){
   e.preventDefault();
 
+  const boton = document.querySelector("button[type='submit']");
+  boton.disabled = true;
+  boton.innerText = "Enviando... ⏳";
+
   const datos = {
     nombre: document.getElementById("nombre").value,
     deParte: document.getElementById("deParte").value,
@@ -262,9 +271,15 @@ document.getElementById("formulario").addEventListener("submit", function(e){
     alert("¡Gracias! Tu confirmación fue registrada 💖");
     document.getElementById("formulario").reset();
     document.getElementById("campoPareja").classList.add("hidden");
+
+    boton.disabled = false;
+    boton.innerText = "Confirmar asistencia ✨";
   })
   .catch(() => {
     alert("Ocurrió un error. Intenta nuevamente.");
+
+    boton.disabled = false;
+    boton.innerText = "Confirmar asistencia ✨";
   });
 });
   

@@ -255,6 +255,20 @@ document.getElementById("formulario").addEventListener("submit", function(e){
     alert("Ocurrió un error. Intenta nuevamente.");
   });
 });
+  
+</script>
+  <audio loop id="musica">
+  <source src="CANCION.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+document.addEventListener('click', () => {
+  const musica = document.getElementById('musica');
+
+  musica.volume = 0.5;
+
+  musica.play().catch(() => {});
+}, { once: true });
 </script>
 </body>
 </html>

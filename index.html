@@ -220,14 +220,26 @@ Nos llena de alegría compartir este momento tan especial contigo ✨
 const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbzN7TAC4nR8GmLayABGkuWZKnWUOM1o1ctfGK_Bmqt6bzp6VFWPzyUY91bt9BNl7zx1Hw/exec";
 
 function mostrarPareja(){
+
   const pareja = document.getElementById("pareja").value;
   const campo = document.getElementById("campoPareja");
+  const inputPareja = document.getElementById("nombrePareja");
 
   if(pareja === "Sí"){
+
     campo.classList.remove("hidden");
+
+    // HACER OBLIGATORIO
+    inputPareja.required = true;
+
   } else {
+
     campo.classList.add("hidden");
-    document.getElementById("nombrePareja").value = "";
+
+    // QUITAR OBLIGATORIO
+    inputPareja.required = false;
+
+    inputPareja.value = "";
   }
 }
 

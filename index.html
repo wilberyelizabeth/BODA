@@ -114,7 +114,60 @@ background:#ffeef2;
 .hidden{
 display:none;
 }
+/* VERSIÓN CELULAR */
+@media (max-width: 768px){
 
+  body{
+    min-height:100vh;
+    height:auto;
+    padding:25px 0;
+    align-items:flex-start;
+
+    background:
+    linear-gradient(rgba(0,0,0,0.30), rgba(0,0,0,0.45)),
+    url('WB.jpeg') no-repeat center top;
+
+    background-size: 100%;
+    background-color:black;
+  }
+
+  body::before{
+    background:rgba(0,0,0,0.25);
+    backdrop-filter:blur(1px);
+  }
+
+  .container{
+    width:90%;
+    margin-top:260px;
+    padding:25px;
+    border-radius:22px;
+    background:rgba(0,0,0,0.45);
+    backdrop-filter:blur(8px);
+  }
+
+  h1{
+    font-size:1.5rem;
+  }
+
+  p{
+    font-size:0.95rem;
+    margin-bottom:20px;
+  }
+
+  label{
+    font-size:0.9rem;
+  }
+
+  input, select{
+    padding:11px;
+    font-size:0.95rem;
+  }
+
+  button{
+    padding:13px;
+    font-size:0.95rem;
+  }
+}
 </style>
 </head>
 

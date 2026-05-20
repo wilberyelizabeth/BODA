@@ -124,64 +124,80 @@ display:none;
 Nos llena de alegría compartir este momento tan especial contigo ✨
 </p>
 
-<form>
+<form id="formulario">
 
-<label>👤 Nombres y Apellidos</label>
-<input type="text" placeholder="Escribe aquí">
+<label>👤 Nombre y Apellido</label>
+<input type="text" id="nombre" placeholder="Escribe aquí" required>
 
 <label>💌 ¿De parte de quién nos acompañas?</label>
-
-<select>
-<option>Selecciona una opción</option>
+<select id="deParte" required>
+<option value="">Selecciona una opción</option>
 <option>Novia 👰</option>
 <option>Novio 🤵</option>
 </select>
 
 <label>🎉 ¿Nos acompañarás?</label>
-<select id="asistencia">
-<option>Selecciona una opción</option>
+<select id="asistencia" required>
+<option value="">Selecciona una opción</option>
 <option>Sí, ahí estaré 💖</option>
 <option>No podré asistir</option>
 </select>
 
 <label>❤️ ¿Asistirás con pareja?</label>
-<select id="pareja" onchange="mostrarPareja()">
-<option>Selecciona una opción</option>
+<select id="pareja" onchange="mostrarPareja()" required>
+<option value="">Selecciona una opción</option>
 <option>Sí</option>
 <option>No</option>
 </select>
 
 <div id="campoPareja" class="hidden">
-
 <label>👥 Nombre y apellido de tu pareja</label>
-<input type="text" placeholder="Nombre de tu pareja">
-
+<input type="text" id="nombrePareja" placeholder="Nombre de tu pareja">
 </div>
 
-<button type="submit">
-Confirmar asistencia ✨
-</button>
+<button type="submit">Confirmar asistencia ✨</button>
 
 </form>
 
-</div>
-
 <script>
+const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbzN7TAC4nR8GmLayABGkuWZKnWUOM1o1ctfGK_Bmqt6bzp6VFWPzyUY91bt9BNl7zx1Hw/exec";
 
 function mostrarPareja(){
+  const pareja = document.getElementById("pareja").value;
+  const campo = document.getElementById("campoPareja");
 
-let pareja=document.getElementById("pareja").value;
-let campo=document.getElementById("campoPareja");
-
-if(pareja==="Sí"){
-campo.classList.remove("hidden");
-}else{
-campo.classList.add("hidden");
+  if(pareja === "Sí"){
+    campo.classList.remove("hidden");
+  } else {
+    campo.classList.add("hidden");
+    document.getElementById("nombrePareja").value = "";
+  }
 }
 
-}
+document.getElementById("formulario").addEventListener("submit", function(e){
+  e.preventDefault();
 
+  const datos = {
+    nombre: document.getElementById("nombre").value,
+    deParte: document.getElementById("deParte").value,
+    asistencia: document.getElementById("asistencia").value,
+    pareja: document.getElementById("pareja").value,
+    nombrePareja: document.getElementById("nombrePareja").value
+  };
+
+  fetch(URL_SCRIPT, {
+    method: "POST",
+    body: JSON.stringify(datos)
+  })
+  .then(() => {
+    alert("¡Gracias! Tu confirmación fue registrada 💖");
+    document.getElementById("formulario").reset();
+    document.getElementById("campoPareja").classList.add("hidden");
+  })
+  .catch(() => {
+    alert("Ocurrió un error. Intenta nuevamente.");
+  });
+});
 </script>
-
 </body>
 </html>
